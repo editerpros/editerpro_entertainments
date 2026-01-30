@@ -1,52 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact – EditerPro Entertainments</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact | EditerPro Entertainments</title>
+<link rel="icon" href="assets/favicon.png" />
+<link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <header>
-    <img src="assets/logo.png" alt="EditerPro Logo" class="logo" />
-    <h1>Contact Us</h1>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="games.html">Games</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
 
-  <section class="hero">
-    <h2>Get in Touch</h2>
-    <p>Have a project, collaboration idea, or business inquiry? Reach out to us.</p>
-  </section>
+<header class="header">
+<img src="assets/logo.png" class="logo" alt="EditerPro Logo" />
+<h1>Contact</h1>
+<nav>
+<a href="index.html">Home</a>
+<a href="games.html">Games</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
+</header>
 
-  <section class="contact-section">
-    <form class="contact-form">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
 
-    <div class="contact-info">
-      <h3>Email</h3>
-      <p>advait8370@proton.me</p>
+<section class="hero">
+<h2 class="reveal">Get in Touch</h2>
+</section>
 
-      <h3>Social</h3>
-      <p>Discord</p>
-    </div>
-  </section>
 
-  <footer>
-    <p>&copy; 2026 EditerPro Entertainments. All rights reserved.</p>
-  </footer>
+<section class="contact-section reveal">
+<form id="contactForm" class="contact-form">
+<input type="text" name="name" placeholder="Your Name" required />
+<input type="email" name="email" placeholder="Your Email" required />
+<textarea name="message" placeholder="Your Message" required></textarea>
+<button class="btn">Send Message</button>
+</form>
+</section>
 
-  <script src="script.js"></script>
+
+<footer>
+<p>© 2026 EditerPro Entertainments. All rights reserved.</p>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="script.js" defer></script>
+<script>
+emailjs.init('YOUR_PUBLIC_KEY');
+document.getElementById('contactForm').onsubmit = e => {
+e.preventDefault();
+emailjs.sendForm('SERVICE_ID','TEMPLATE_ID',e.target)
+.then(() => alert('Message sent successfully!'));
+};
+</script>
 </body>
 </html>
-
