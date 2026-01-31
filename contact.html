@@ -22,19 +22,17 @@
 </header>
 
 <section class="hero">
-  <h2 class="reveal">Get in Touch</h2>
+  <h2>Get in Touch</h2>
+  <p>Have a question or collaboration idea? Send us a message.</p>
 </section>
 
-<section class="contact-section reveal">
+<section class="contact-section">
   <form id="contactForm" class="contact-form">
     <input type="text" name="name" placeholder="Your Name" required />
     <input type="email" name="email" placeholder="Your Email" required />
     <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
 
-    <button class="btn" id="sendBtn" type="submit">
-      Send Message
-    </button>
-
+    <button class="btn" id="sendBtn" type="submit">Send Message</button>
     <p id="statusMsg" style="margin-top:10px;"></p>
   </form>
 </section>
@@ -43,44 +41,52 @@
   <p>© 2026 EditerPro Entertainments. All rights reserved.</p>
 </footer>
 
-<!-- ✅ EmailJS v4 (IMPORTANT) -->
+<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
-  (function () {
-    emailjs.init({
-      publicKey: "oKF5RGAf2L8gaRtKJ"
-    });
-  })();
+document.addEventListener('DOMContentLoaded', function () {
 
-  const form = document.getElementById("contactForm");
-  const statusMsg = document.getElementById("statusMsg");
-  const sendBtn = document.getElementById("sendBtn");
+  // Init EmailJS
+  emailjs.init({
+    publicKey: 'oKF5RGAf2L8gaRtKJ'
+  });
 
-  form.addEventListener("submit", function (e) {
+  const form = document.getElementById('contactForm');
+  const sendBtn = document.getElementById('sendBtn');
+  const statusMsg = document.getElementById('statusMsg');
+
+  if (!form) {
+    console.error('Form not found');
+    return;
+  }
+
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
 
     sendBtn.disabled = true;
-    sendBtn.textContent = "Sending...";
-    statusMsg.textContent = "";
+    sendBtn.textContent = 'Sending...';
+    statusMsg.textContent = '';
 
     emailjs.sendForm(
-      "service_2t3pc8q",
-      "template_j68flp4",
+      'service_2t3pc8q',
+      'template_j68flp4',
       form
     ).then(() => {
-      statusMsg.textContent = "✅ Message sent successfully!";
-      statusMsg.style.color = "#00ff9c";
+      statusMsg.textContent = '✅ Message sent successfully!';
+      statusMsg.style.color = '#00ff9c';
       form.reset();
-    }).catch((error) => {
-      statusMsg.textContent = "❌ Failed to send message. Try again later.";
-      statusMsg.style.color = "#ff4d4d";
-      console.error("EmailJS error:", error);
+    }).catch((err) => {
+      statusMsg.textContent = '❌ Failed to send message.';
+      statusMsg.style.color = '#ff4d4d';
+      console.error(err);
     }).finally(() => {
       sendBtn.disabled = false;
-      sendBtn.textContent = "Send Message";
+      sendBtn.textContent = 'Send Message';
     });
   });
+
+});
 </script>
 
 </body>
